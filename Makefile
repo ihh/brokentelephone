@@ -4,7 +4,7 @@ all: evolve sheet.pdf.open
 %: %.cc
 	g++ -O3 -lstdc++ -o $@ $<
 
-# Makefile.defs contains the dictionaries, initial phrases, and evolution rules
+# Edit Makefile.defs to contain the dictionaries, initial phrases, and evolution rules
 include Makefile.defs
 
 # autogen quotes

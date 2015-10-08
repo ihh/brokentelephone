@@ -1,0 +1,11 @@
+# dictionary
+DICT = scowl.txt
+
+# text
+TEXT = CARROLL
+
+# evolve syntax:
+# ./evolve [dictionary file] [mean edits per word, per branch] [max edits per letter, per branch] [symmetric tree depth, in branches] [root sentence, dictionary words separated by spaces...]
+
+CARROLL: evolve
+	./evolve $(DICT) .8 .5 5 How cheerfully he seems to grin How neatly spreads his claws And welcomes little fishes in with gently smiling jaws >$@

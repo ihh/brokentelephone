@@ -1,0 +1,121 @@
+\documentclass[10pt,letterpaper,english]{article}
+
+\pagestyle{empty}
+
+
+\setlength{\oddsidemargin}{0in}
+\setlength{\evensidemargin}{0in}
+\addtolength{\textwidth}{1in}
+\addtolength{\topmargin}{-.25in}
+\addtolength{\textheight}{.5in}
+
+\begin{document}
+
+\newcommand\generatepages{\input{TEXT.tex}}
+
+\newcommand{\handout}[2]{
+\newpage
+\subsection*{Broken Telephone Tree}
+
+\begin{centering}
+\fbox{
+\parbox{\textwidth}
+{{\em Broken Telephone is a game in which each successive participant secretly whispers to the next a phrase or sentence whispered to them by the preceding participant. Cumulative errors from mishearing often result in the sentence heard by the last player differing greatly and amusingly from the one uttered by the first... It is often invoked as a metaphor for cumulative error, especially the inaccuracies of rumours or gossip.} \hspace*{\fill} (Wikipedia)}
+}
+\end{centering}
+
+In this class, we will {\bf not} be playing Broken Telephone, {\em per se}.
+Instead, we will be assuming that we have just walked in on a room where
+it has been played.
+We are given the final version(s) of the message
+and it is our job to reconstruct the original.
+We are therefore analyzing the {\em output} of a broken telephone network,
+rather than simulating the broken telephone itself.
+
+The game that was played here, whose output we will analyze, is slightly different
+to the classical version (see Wikipedia description, above).
+Here, the message network was not a linear
+chain of participants, but rather a {\em telephone tree}
+(a typical communications tool
+ of neighborhood watch groups, parent-teacher associations,
+ and clandestine spy networks).
+
+In our {\em broken telephone tree}, each participant whispered the message to {\em two other} participants.
+The first person whispered their message to two people, those two people whispered their message to four more people, and so on: the message was duplicated at every round.
+The process continued for five rounds, after which there were $2^5=32$ (different) final versions of the message (plus many intermediate versions).
+
+Following this, the intermediate message-carriers were all lost
+%\footnote{This somewhat brutal twist may explain the relatively low popularity of this version of the game at childrens' parties.
+%For ethical considerations, we used Perl to automate the garbled message transmission; no actual human couriers were disappeared.}
+ (executed, imprisoned, graduated, etc.)
+With them, knowledge of the underlying structure of the communications network disappeared.
+There are now 32 related versions of the same message, but no-one knows what the original message was, or the exact details of the relationships (i.e. the structure of the telephone tree).
+We know a tree was involved, but we do not know who called whom.
+Only the 32 messages remain, and you only have one of those messages (see below).
+
+Your goal, and the real point of this version of the game, is to reconstruct as much as possible of the {\bf original} message --- {\em and} the structure of the transmission network.
+The problem is directly analogous to reconstructing the evolutionary history {\bf (phylogeny)} of genes and organisms, based on modern-day DNA/RNA/protein sequences.
+
+{\bf Course credit is available for the best available reconstruction.}
+A partial reconstruction (e.g. of only some of the messages) is OK.
+
+{\bf Suggested procedure is overleaf, but feel free to deviate from this.}
+The overall goal is simply to reconstruct as much of the message network (including the root message) as possible.
+Use whatever techniques you feel are most appropriate to this end.
+Obviously, since you only have one of the 32 messages, you are going to have to exchange information (and probably some results) with other class members.
+The guidelines overleaf are probably a good place to start,
+but the precise nature and extent of your co-operation is left up to you.
+
+\vspace{\baselineskip}
+\noindent
+{\bf Your ID number} (from 1 to 32, randomly assigned) is ... {\bf #1}
+
+\noindent
+{\bf Your message is ...}
+
+\vspace{\baselineskip}
+
+\begin{centering}
+\fbox{ \parbox{\textwidth}{\tt #2} }
+\end{centering}
+
+\newpage
+
+\subsubsection*{Suggested Procedure}
+
+These are only guidelines. See overleaf for the description of the game you are playing.
+
+\begin{itemize}
+\item {\bf Find a partner.} (Teams of three are also OK.) Compute the {\bf Levenshtein edit distance} of your message to your partner's message(s).
+You may assume a one-to-one correspondence between words (every word in your message is directly related to the corresponding word at the same position in their message).
+\begin{itemize}
+\item The definition of Levenshtein edit distance: count one for each {\bf single-letter} substitution, insertion or deletion.
+(So, deleting two letters takes two distance units.)
+\end{itemize}
+\item You and your partner should now {\bf team up with another pair}, so that there are four of you in a team.
+(Slightly larger teams are also OK.) Compute the edit distance between {\em each pair} of messages.
+If there are $N$ people in your team, you should end up with a table of $\frac{1}{2}N(N-1)$ edit distances.
+\item {\bf Attempt to reconstruct the tree} (i.e. the message communication network structure) underlying the four messages of your team.
+Caution: you may have mixed success with this. It depends to some extent on how close your team-members' messages are.
+What sort of strategy will you use? (Hint: write out all the pairwise distances, e.g. in a table. Are any pairs of messages more closely related?)
+\item At this point you can also start attempting to guess the sentences at ``intermediate'' nodes of the tree.
+Eventually, with enough data, you can try to guess the original sentence at the root of the tree.
+\item {\bf Your team should now combine with another team}. Find a two-person team or another four-person team; it doesn't really matter.
+Pool information, and attempt to reconstruct the tree for all six (or eight) of your messages, to the best of your ability.
+Does adding more messages make things easier, or harder? What is the rate-limiting step in reconstructing the network topologies?
+\item Keep doing this... {\bf attempt to gather as much information} about the other messages in the class as you can in the time available.
+You can continue to work in large teams, or break up into smaller teams again, or swap people between teams, or work individually (your choice).
+There is no ``curve'' for this exercise, so it's up to you as a class how collaboratively or competitively you approach it.
+\item After the class, you should post your best-guess reconstruction to bCourses.
+Use Newick-format\footnote[1]{See definition here: {\tt http://evolution.genetics.washington.edu/phylip/newicktree.html}}
+brackets around ID numbers to represent the message tree.
+For example, a valid tree for messages with ID numbers 1, 2, 3 \& 4
+is ``((1,4),(2,3))''.
+You do not need to put ``branch lengths'' on the tree.
+You should also guess the original (root) sentence, and post this, along with a description of the approach you took.
+\end{itemize}
+}
+
+\generatepages
+
+\end{document}

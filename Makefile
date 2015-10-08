@@ -31,5 +31,12 @@ DICT = scowl.txt
 # evolve syntax:
 # ./evolve [dictionary file] [mean edits per word, per branch] [max edits per letter, per branch] [symmetric tree depth, in branches] [root sentence, dictionary words separated by spaces...]
 
+# default settings
+EVOLVE = ./evolve $(DICT) .8 .5 5
+
+# Example of use:
+#  $(EVOLVE) The sky above the port was the color of television tuned to a dead channel >GIBSON
+#  make TEXT=GIBSON sheet.pdf
+
 # keep intermediates
 .SECONDARY:

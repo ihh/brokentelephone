@@ -85,7 +85,7 @@ vector<int> evolve_sentence (const vector<int>& ancestor, int edits, double max_
   vector<int> remaining_edits (len);
   vector<int> descendant (ancestor);
   for (int n = 0; n < len; ++n)
-    remaining_edits[n] = (int) (.5 + max_edits_per_letter * words[descendant[n]].size());
+    remaining_edits[n] = max (1, (int) (.5 + max_edits_per_letter * (double) words[descendant[n]].size()));
   bool first_edit = true;
   while (edits > 0)
     {
@@ -102,7 +102,7 @@ vector<int> evolve_sentence (const vector<int>& ancestor, int edits, double max_
 	  if (first_edit) {
 	    //	    cerr << nbr.size() << " neighbors of '" << words[descendant[n]] << "'\n";
 	    if (nbr.size() == 0)
-	      cerr << "Warning: stuck on '" << words[descendant[n]] << "'\n";
+	      cerr << "Warning: stuck on '" << words[descendant[n]] << "', no neighbors within " << remaining_edits[n] << " edits\n";
 	  }
 	  const double weight_n = 1. / (double) nbr.size();
 	  for (int k = 0; k < (int) nbr.size(); ++k)
@@ -137,7 +137,7 @@ vector<int> evolve_sentence (const vector<int>& ancestor, int edits, double max_
   return descendant;
 }
 
-void evolve_subtree (const vector<int>& ancestor, int remaining_generations, const string& indent, int edits, int max_edits_per_letter, const vector<string>& words, vector<vector<int> >& ed_matrix)
+void evolve_subtree (const vector<int>& ancestor, int remaining_generations, const string& indent, int edits, double max_edits_per_letter, const vector<string>& words, vector<vector<int> >& ed_matrix)
 {
   // stderr
   cerr << "Printing:" << indent;

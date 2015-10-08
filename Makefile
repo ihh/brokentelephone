@@ -25,5 +25,11 @@ sheet.pdf.open: sheet.pdf
 TEXT.tex: $(TEXT).tex
 	cp $< $@
 
+# dictionary
+DICT = scowl.txt
+
+# evolve syntax:
+# ./evolve [dictionary file] [mean edits per word, per branch] [max edits per letter, per branch] [symmetric tree depth, in branches] [root sentence, dictionary words separated by spaces...]
+
 # keep intermediates
 .SECONDARY:

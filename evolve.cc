@@ -10,13 +10,18 @@ using namespace std;
 #define min(a,b) ((a) < (b) ? (a) : (b))
 #define max(a,b) ((a) > (b) ? (a) : (b))
 
-// avoid calling this function with identical x & y
-int edit_distance (const string& x, const string& y, vector<vector<int> >& ed_matrix)
+// if at any point the edit distance is known to be D or greater, where D > max_edits,
+// then this function returns -D
+int edit_distance (const string& x, const string& y, vector<vector<int> >& ed_matrix, int max_edits)
 {
   const int xsize = x.size();
   const int ysize = y.size();
+  const int min_edits_by_len = abs (xsize - ysize);
+  if (min_edits_by_len > max_edits)
+    return -min_edits_by_len;
   ed_matrix[0][0] = 0;
-  for (int i = 1; i <= xsize; ++i)
+  for (int i = 1; i <= xsize; ++i) {
+    int row_min_sc = max_edits + 1;
     for (int j = 1; j <= ysize; ++j)
       {
 	const int match_sc = ed_matrix[i-1][j-1] + (x[i-1] == y[j-1] ? 0 : 1);
@@ -24,8 +29,13 @@ int edit_distance (const string& x, const string& y, vector<vector<int> >& ed_ma
 	const int del_sc = ed_matrix[i][j-1] + 1;
 
 	const int gap_sc = min (ins_sc, del_sc);
-	ed_matrix[i][j] = min (match_sc, gap_sc);
+	const int cell_sc = min (match_sc, gap_sc);
+	ed_matrix[i][j] = cell_sc;
+	row_min_sc = min (row_min_sc, cell_sc);
       }
+    if (row_min_sc > max_edits)
+      return -row_min_sc;
+  }
 
   const int dist = ed_matrix[xsize][ysize];
 
@@ -50,16 +60,31 @@ int edit_distance (const string& x, const string& y, vector<vector<int> >& ed_ma
   return dist;
 }
 
+typedef vector<map<int,int> > EDCache;
+EDCache edit_distance_cache;
+int get_edit_distance (const vector<string>& words, int x, int y, vector<vector<int> >& ed_matrix, int max_edits) {
+  map<int,int>::const_iterator ed_iter = edit_distance_cache[x].find(y);
+  if (ed_iter != edit_distance_cache[x].end()) {
+    const int cached_ed = ed_iter->second;
+    if (cached_ed >= 0 || (-cached_ed > max_edits))
+      return cached_ed;
+  }
+
+  const int ed = edit_distance (words[x], words[y], ed_matrix, max_edits);
+  edit_distance_cache[x][y] = ed;
+
+  return ed;
+}
+
 void get_neighbors (const vector<string>& words, int src, int max_edits, vector<vector<int> >& ed_matrix, vector<int>& nbr, vector<int>& dist)
 {
   nbr.clear();
   dist.clear();
-  const string& src_word = words[src];
   for (int dest = 0; dest < (int) words.size(); ++dest)
     if (dest != src)
       {
-	const int ed = edit_distance (src_word, words[dest], ed_matrix);
-	if (ed <= max_edits)
+	const int ed = get_edit_distance (words, src, dest, ed_matrix, max_edits);
+	if (ed >= 0 && ed <= max_edits)
 	  {
 	    nbr.push_back (dest);
 	    dist.push_back (ed);
@@ -183,6 +208,7 @@ int main (int argc, char** argv)
 	    max_len = s.size();
 	}
     }
+  edit_distance_cache = EDCache (word.size());
 
   vector<int> seed;
   for (int n = 0; n+5 < argc; ++n)

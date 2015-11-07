@@ -434,6 +434,7 @@ sub parse {
     for ( $i = $#tokens; $i >= 0; $i-- ) {
         last if $tokens[$i] eq ';';
     }
+    $i = @tokens if $i < 0;   # be tolerant to missing ";" at end
     my $root = $tree->add_node(-1);
     $tree->_parse_node_data( $root, @tokens[ 0 .. ( $i - 1 ) ] );
     $tree->_parse_clade( $tree, $root, @tokens[ 0 .. ( $i - 1 ) ] );
@@ -626,22 +627,24 @@ sub _next_token {
 
 sub splits {
     my ($self) = @_;
-    my @is_under = map ({}, 1..$self->nodes);
-    for (my $node = $self->nodes - 1; $node >= 0; --$node) {
+    my %is_under;
+    for (my $node = $self->nodes - 1; $node > 0; --$node) {
 	my @c = $self->children ($node);
 	if (@c) {
-	    $is_under[$node] = { map (%{$is_under[$_]}, @c) };
+	    $is_under{$node} = { map (%{$is_under{$_}}, @c) };
 	} else {
-	    $is_under[$node] = { $self->node_name->[$node] => 1 };
+	    $is_under{$node} = { $self->node_name->[$node] => 1 };
 	}
     }
     my @leaf_name = map ($self->node_name->[$_], $self->leaves);
     my @splits;
-    for my $u (@is_under) {
+    for my $u (values %is_under) {
 	my $under = join (" ", sort keys %$u);
 	my $not_under = join (" ", sort grep (!$u->{$_}, @leaf_name));
-	push @splits, $under lt $not_under ? "$under;$not_under" : "$not_under;$under";
+	push @splits, ((length($under) < length($not_under)) || ($under lt $not_under)) ? $under : $not_under;
     }
+#    warn "Tree: ", $self->to_string, "\n";    
+#    warn "Splits:\n", map ("$_\n", @splits);
     return sort @splits;
 }
 
@@ -653,6 +656,7 @@ sub robinson_foulds {
     my $in_both = 0;
     for my $self_split (@self_splits) {
 	++$in_both if $in_other_splits{$self_split};
+#	warn "In both: $self_split\n" if $in_other_splits{$self_split};
     }
     return (@self_splits + @other_splits) / 2 - $in_both;
 }

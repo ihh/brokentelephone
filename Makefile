@@ -15,6 +15,10 @@ include Makefile.defs
 %.consensus: %
 	grep "     " $< | perl -e 'while(<>){@f=split;for$$n(0..@f-1){$$c[$$n]->{$$f[$$n]}++}}for$$n(0..@c-1){%c=%{$$c[$$n]};@w=sort{$$c{$$a}<=>$$c{$$b}}keys%c;print$$w[@w-1]," "}' >$@
 
+# true sentence
+%.root: %
+	cat $< | head -1 >$@
+
 # Tree
 %.tree: %.tex
 	./recover_tree.pl 5 $< >$@

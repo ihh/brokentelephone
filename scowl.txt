@@ -41465,18 +41465,6 @@ coomed
 cooming
 cooms
 coomy
-coon
-coonass
-coonasses
-cooncan
-cooncans
-coondog
-coondogs
-coonhound
-coonhounds
-coons
-coonskin
-coonskins
 coontie
 coonties
 coonty
@@ -47562,11 +47550,8 @@ daggling
 daggy
 daglock
 daglocks
-dago
 dagoba
 dagobas
-dagoes
-dagos
 dags
 daguerrean
 daguerreotype
@@ -48038,7 +48023,6 @@ darkroom
 darkrooms
 darks
 darksome
-darky
 darling
 darlingly
 darlingness
@@ -54313,7 +54297,6 @@ dinitrobenzene
 dinitrobenzenes
 dinitrophenol
 dinitrophenols
-dink
 dinked
 dinkey
 dinkeys
@@ -54323,7 +54306,6 @@ dinkies
 dinkiest
 dinking
 dinkly
-dinks
 dinkum
 dinkums
 dinky
@@ -83257,9 +83239,6 @@ googols
 googs
 gooier
 gooiest
-gook
-gooks
-gooky
 gool
 gooley
 gooleys
@@ -104246,7 +104225,6 @@ jansky
 janskys
 janties
 janty
-jap
 japan
 japanesy
 japanize
@@ -104271,7 +104249,6 @@ japonaiserie
 japonaiseries
 japonica
 japonicas
-japs
 jar
 jararaca
 jararacas
@@ -105831,8 +105808,6 @@ kaffeeklatch
 kaffeeklatches
 kaffeeklatsch
 kaffeeklatsches
-kaffir
-kaffirs
 kaffiyah
 kaffiyahs
 kaffiyeh
@@ -107011,8 +106986,6 @@ kieve
 kieves
 kif
 kifs
-kike
-kikes
 kikoi
 kikumon
 kikumons
@@ -184707,10 +184680,6 @@ shyers
 shyest
 shying
 shyish
-shylock
-shylocked
-shylocking
-shylocks
 shyly
 shyness
 shynesses
@@ -191507,7 +191476,6 @@ sphygmoscopes
 sphygmus
 sphygmuses
 spial
-spic
 spica
 spicae
 spicas
@@ -191538,7 +191506,6 @@ spiciness
 spicinesses
 spicing
 spicknel
-spics
 spicula
 spiculae
 spicular
@@ -228973,8 +228940,6 @@ westwards
 wet
 weta
 wetas
-wetback
-wetbacks
 wether
 wethers
 wetland
@@ -230897,11 +230862,8 @@ woewearied
 woeworn
 wofully
 wofulness
-wog
-woggish
 woggle
 woggles
-wogs
 woiwode
 woiwodes
 wok
@@ -232722,9 +232684,7 @@ yicker
 yickered
 yickering
 yickers
-yid
 yiddishism
-yids
 yield
 yieldabilities
 yieldability

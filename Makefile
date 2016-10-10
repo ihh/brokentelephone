@@ -2,7 +2,8 @@
 all: evolve sheet.pdf.open
 
 %: %.cc
-	g++ -O3 -lstdc++ -o $@ $<
+	g++ -g -lstdc++ -o $@ $<
+#	g++ -g -O3 -lstdc++ -o $@ $<
 
 # Edit Makefile.defs to contain the dictionaries, initial phrases, and evolution rules
 include Makefile.defs

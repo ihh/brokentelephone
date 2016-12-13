@@ -1,7 +1,8 @@
 
-all: evolve sheet.pdf.open
+all: bin/evolve sheet.pdf.open
 
-%: %.cc
+bin/%: %.cc
+	mkdir -p bin
 	g++ -g -lstdc++ -o $@ $<
 #	g++ -g -O3 -lstdc++ -o $@ $<
 
@@ -9,7 +10,7 @@ all: evolve sheet.pdf.open
 include Makefile.defs
 
 # autogen quotes
-%.tex: %
+%.tex: %.src
 	cat $< | perl -e '@x=<>;@y=(0..@x-1);for$$i(0..@x-1){$$j=int(rand(@x-$$i))+$$i;@x[$$i,$$j]=@x[$$j,$$i];@y[$$i,$$j]=@y[$$j,$$i];chomp$$x[$$i];print$$x[$$i],"\t",$$y[$$i],"\n"}' | perl -e '$$n=0;while(<>){if(/     /){s/\s+/ /g;if(/(.*)\s(\d+)\s*$$/){print"\\handout{",++$$n,"}{$$1}  % $$2\n"}}}' >$@
 
 # consensus. hardwired for 32 leaves (5 branches, hence 5 spaces of indent)
@@ -38,10 +39,10 @@ TEXT.tex: $(TEXT).tex
 DICT = scowl.txt
 
 # evolve syntax:
-# ./evolve [dictionary file] [mean edits per word, per branch] [max edits per letter, per branch] [symmetric tree depth, in branches] [root sentence, dictionary words separated by spaces...]
+# bin/evolve [dictionary file] [mean edits per word, per branch] [max edits per letter, per branch] [symmetric tree depth, in branches] [root sentence, dictionary words separated by spaces...]
 
 # default settings
-EVOLVE = ./evolve $(DICT) .8 .5 5
+EVOLVE = bin/evolve $(DICT) .8 .5 5
 
 # Example of use:
 #  $(EVOLVE) The sky above the port was the color of television tuned to a dead channel >GIBSON
@@ -49,3 +50,6 @@ EVOLVE = ./evolve $(DICT) .8 .5 5
 
 # keep intermediates
 .SECONDARY:
+
+# no suffix rules
+.SUFFIXES:

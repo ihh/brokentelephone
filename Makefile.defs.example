@@ -1,0 +1,8 @@
+# text
+TEXT = CARROLL
+
+CARROLL.src: bin/evolve scowl.txt
+	$(EVOLVE) How cheerfully he seems to grin How neatly spreads his claws And welcomes little fishes in With gently smiling jaws >$@
+
+BORGES.src: bin/evolve scowl.txt
+	$(EVOLVE) Thousands of the greedy abandoned their sweet native hexagons and rushed up the stairways urged on by the vain intention of finding their Vindication >$@

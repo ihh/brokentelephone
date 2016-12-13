@@ -637,15 +637,18 @@ sub splits {
 	}
     }
     my @leaf_name = map ($self->node_name->[$_], $self->leaves);
-    my @splits;
+    my %is_split;
     for my $u (values %is_under) {
-	my $under = join (" ", sort keys %$u);
-	my $not_under = join (" ", sort grep (!$u->{$_}, @leaf_name));
-	push @splits, ((length($under) < length($not_under)) || ($under lt $not_under)) ? $under : $not_under;
+	my @under = sort keys %$u;
+	my @not_under = sort grep (!$u->{$_}, @leaf_name);
+	my $under = join (" ", @under);
+	my $not_under = join (" ", @not_under);
+	++$is_split{((@under+0 < @not_under+0) || ($under lt $not_under)) ? $under : $not_under};
     }
-#    warn "Tree: ", $self->to_string, "\n";    
+    my @splits = sort keys %is_split;
+#    warn "Tree: ", $self->to_string, "\n";
 #    warn "Splits:\n", map ("$_\n", @splits);
-    return sort @splits;
+    return @splits;
 }
 
 sub robinson_foulds {
@@ -653,11 +656,17 @@ sub robinson_foulds {
     my @self_splits = $self->splits;
     my @other_splits = $other->splits;
     my %in_other_splits = map (($_ => 1), @other_splits);
+    my %in_self_splits = map (($_ => 1), @self_splits);
     my $in_both = 0;
     for my $self_split (@self_splits) {
 	++$in_both if $in_other_splits{$self_split};
 #	warn "In both: $self_split\n" if $in_other_splits{$self_split};
+#	warn "Not in other: $self_split\n" unless $in_other_splits{$self_split};
     }
+    for my $other_split (@other_splits) {
+#	warn "Not in self: $other_split\n" unless $in_self_splits{$other_split};
+    }
+#    warn "self_splits: ", @self_splits+0, " other_splits: ", @other_splits+0, " in_both: ", $in_both, "\n";
     return (@self_splits + @other_splits) / 2 - $in_both;
 }
 

@@ -2,7 +2,8 @@
 all: evolve sheet.pdf.open
 
 %: %.cc
-	g++ -O3 -lstdc++ -o $@ $<
+	g++ -g -lstdc++ -o $@ $<
+#	g++ -g -O3 -lstdc++ -o $@ $<
 
 # Edit Makefile.defs to contain the dictionaries, initial phrases, and evolution rules
 include Makefile.defs
@@ -14,6 +15,10 @@ include Makefile.defs
 # consensus. hardwired for 32 leaves (5 branches, hence 5 spaces of indent)
 %.consensus: %
 	grep "     " $< | perl -e 'while(<>){@f=split;for$$n(0..@f-1){$$c[$$n]->{$$f[$$n]}++}}for$$n(0..@c-1){%c=%{$$c[$$n]};@w=sort{$$c{$$a}<=>$$c{$$b}}keys%c;print$$w[@w-1]," "}' >$@
+
+# true sentence
+%.root: %
+	cat $< | head -1 >$@
 
 # Tree
 %.tree: %.tex

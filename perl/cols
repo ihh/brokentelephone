@@ -1,0 +1,36 @@
+#!/usr/bin/perl
+
+($prog = $0) =~ s/.*\/(\S+)/$1/;
+
+$usage  = "Usage: $prog [-n] [-c <cols>] [<files>]\n";
+$usage .= "\n";
+$usage .= "Switches: -n  No buffering (don't look ahead to calculate column widths, but adjust them on the fly)\n";
+
+while (@ARGV) {
+    last unless $ARGV[0] =~ /^-/;
+    $opt = lc shift;
+    if ($opt eq "-n") { $nobuffer = 1 }
+    elsif ($opt eq "-c") { defined ($cols = shift) or die $usage }
+    else { die "$usage\nUnknown option: $opt\n" }
+}
+
+$more = $ENV{"PAGER"};
+if ($more eq $prog || length($more) == 0) { $more = "more" }
+
+while (<>) {
+    chomp;
+    if (defined $cols) {
+	@f = split /\s+/, $_, $cols;
+    } else {
+	@f = split;
+    }
+    for ($i=0;$i<@f;$i++) {
+	if (($w=length($f[$i])) > $width[$i]) {
+	    $width[$i] = $w;
+	    $format = join(" ",map("%- $_"."s",@width)) . "\n";
+	}
+    }
+    if ($nobuffer) { printf $format, @f }
+    else { push @buffer, [@f] }
+}
+foreach (@buffer) { printf $format, @$_ }

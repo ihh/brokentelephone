@@ -5829,6 +5829,7 @@ amerciable
 amerciament
 amerciaments
 amercing
+america
 americium
 americiums
 amesace
@@ -34483,6 +34484,7 @@ civilist
 civilists
 civilities
 civility
+civilization
 civilly
 civism
 civisms

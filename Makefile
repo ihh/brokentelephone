@@ -17,6 +17,9 @@ include Makefile.defs
 %.consensus: %
 	grep "     " $< | perl -e 'while(<>){@f=split;for$$n(0..@f-1){$$c[$$n]->{$$f[$$n]}++}}for$$n(0..@c-1){%c=%{$$c[$$n]};@w=sort{$$c{$$a}<=>$$c{$$b}}keys%c;print$$w[@w-1]," "}' >$@
 
+%.cols: %
+	egrep "^     " $< | perl/cols >$@
+
 # true sentence
 %.root: %
 	cat $< | head -1 >$@
@@ -30,7 +33,7 @@ sheet.pdf: sheet.tex TEXT.tex
 	pdflatex $<
 
 sheet.pdf.open: sheet.pdf
-	open -a /Applications/Preview.app $<
+	open $<
 
 TEXT.tex: $(TEXT).tex
 	cp $< $@
@@ -42,6 +45,7 @@ DICT = scowl.txt
 # bin/evolve [dictionary file] [mean edits per word, per branch] [max edits per letter, per branch] [symmetric tree depth, in branches] [root sentence, dictionary words separated by spaces...]
 
 # default settings
+#EVOLVE = bin/evolve $(DICT) .8 .5 5
 EVOLVE = bin/evolve $(DICT) .8 .5 5
 
 # Example of use:

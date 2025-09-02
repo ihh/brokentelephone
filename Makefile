@@ -1,5 +1,5 @@
 
-all: bin/evolve sheet.pdf.open
+all: sheet.pdf.open
 
 bin/%: %.cc
 	mkdir -p bin

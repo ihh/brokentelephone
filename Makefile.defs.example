@@ -1,5 +1,5 @@
 # text
-TEXT = CARROLL
+TEXT = ORTON
 
 # Pre-LLM examples (just mutating words using a dictionary):
 
@@ -9,7 +9,11 @@ CARROLL.src: bin/evolve scowl.txt
 BORGES.src: bin/evolve scowl.txt
 	$(EVOLVE) Thousands of the greedy abandoned their sweet native hexagons and rushed up the stairways urged on by the vain intention of finding their Vindication >$@
 
-# LLM-based example (preserves sense/meter/phonetics, more faithfully emulates a game of 'Telephone'):
+# LLM-based examples (preserves sense/meter/phonetics, more faithfully emulates a game of 'Telephone')
+# The LLM methods don't need you to build the bin/evolve script, or download a word dictionary.
+
+ORTON.src:
+	python telephone_tree.py "Cleanse my heart. Give me the ability to rage correctly" --prompt-distance '4-8' >$@
 
 GIBSON.src:
 	python telephone_tree.py "The sky above the port was the color of television tuned to a dead channel" --prompt-distance '6-12' >$@

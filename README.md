@@ -13,7 +13,10 @@ How to build:
 Check out [Makefile.defs.example](https://github.com/ihh/brokentelephone/blob/master/Makefile.defs.example) for examples.
 For example, your `Makefile.defs` might look like this:
 
-    TEXT = GIBSON
+    TEXT = ORTON
+    
+    ORTON.src:
+    	python telephone_tree.py "Cleanse my heart. Give me the ability to rage correctly" --prompt-distance '4-8' >$@
 
-    GIBSON.src:
-    	python telephone_tree.py "The sky above the port was the color of television tuned to a dead channel" --prompt-distance '6-12' >$@
+(The quote is from [Joe Orton's diaries](https://en.wikipedia.org/wiki/Joe_Orton).)
+An example handout generated from this source text is [here](https://github.com/ihh/brokentelephone/blob/master/example.pdf).

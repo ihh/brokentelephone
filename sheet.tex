@@ -91,41 +91,47 @@ but the precise nature and extent of your co-operation is left up to you.
 
 \subsubsection*{Suggested Procedure}
 
-These are only guidelines. See overleaf for the description of the game you are playing.
+Here are some suggestions for things to do.
+These are, however, just suggestions.
+See overleaf for the description of the game.
 
 \begin{itemize}
-\item {\bf Find a partner.} (Teams of three are also OK.) Compute the {\bf Levenshtein edit distance} of your message to your partner's message(s).
-%You may assume a one-to-one correspondence between words (every word in your message is directly related to the corresponding word at the same position in their message).
+\item {\bf Find a random partner.} (Teams of three are also OK.) Compute the {\bf Levenshtein edit distance} of your message to your partner's message(s).
+% You may assume a one-to-one correspondence between words (every word in your message is directly related to the corresponding word at the same position in their message).
 \begin{itemize}
 \item The Levenshtein edit distance from string $X$ to string $Y$ is defined to be
   the minimum number of single-character edit operations (substitutions, insertions or deletions) required to transform $X$ into $Y$.
   So, for example, the Levenshtein distance from CAT to HAM is 2 (CAT$\to$HAT$\to$HAM); whereas the Levenshtein distance from BAT to CASH is 3 (BAT$\to$BATH$\to$BASH$\to$CASH).
   {\em (Note that the intermediate steps in the Levenshtein edit path do not, in general, have to be valid English words, although they happen to be in the above examples.)}
 \end{itemize}
-\item You and your partner should now {\bf merge with another pair}, so that there are (roughly or exactly) twice as many of you in the group.
-Compute the edit distance between {\em each pair} of messages in your group.
-If there are $N$ people in your team, you should end up with a table of $\frac{1}{2}N(N-1)$ edit distances.
-\item {\bf Attempt to reconstruct the tree} (i.e. the message communication network structure) underlying the four messages of your team.
-Caution: you may have mixed success with this. It depends to some extent on how close your team-members' messages are.
-What sort of strategy will you use? (Hint: write out all the pairwise distances, e.g. in a table. Are any pairs of messages more closely related?)
-\item At this point you can also start attempting to guess the sentences at ``intermediate'' nodes of the tree.
-Eventually, with enough data, you can try to guess the original sentence at the root of the tree.
-\item {\bf Your group should continue to combine with other groups}.
-Pool information, and attempt to reconstruct the tree underlying your messages, to the best of your ability.
-Does adding more messages make things easier, or harder? Think about how this problem scales with the number of nodes in the tree.
-\item Keep doing this... {\bf attempt to gather as much information} about the other messages in the class as you can in the time available.
-You can continue to work in large teams, or break up into smaller teams again, or swap people between teams, or work individually (your choice).
-%There is no ``curve'' for this exercise, so it's up to you as a class how collaboratively or competitively you approach it.
-\item After the class, submit your best-guess reconstruction of the original (root) sentence to bCourses.
-%\item If you are feeling ambitious, try submitting a reconstruction of the phylogeny as well.
-%Use Newick-format\footnote[1]{See definition here: {\tt http://evolution.genetics.washington.edu/phylip/newicktree.html}}
-%brackets around ID numbers to represent the message tree.
-%For example, a valid tree for messages with ID numbers 1, 2, 3 \& 4
-%is ``((1,4),(2,3))''.
-%This indicates that IDs 1\&4 are siblings, as are 2\&3.
-%(You do not need to put ``branch lengths'' on the tree.)
-%You should also guess the original (root) sentence, and post this, along with a description of the approach you took.
+\item You and your partner should next do the following (it doesn't matter which; try them in a random order, if you like). Record all the edit distances you calculate.
+  \begin{itemize}
+  \item Find a different random partner, and calculate the Levenshtein edit distance to them.
+  \item {\bf Can you find the person in the room whose message is closest to yours?} This is your phone-tree sibling!
+  \item Can you reconstruct the message of your phone-tree parent? (Hint: find your phone-tree sibling, and compare messages...)
+  \item Can you and your sibling find your phone-tree first cousins? That is, another pair of people who (a) are phone-tree siblings, and (b) have a phone-tree parent who is the sibling of your phone-tree parent? (Hint: they should be the pair whose messages are the closest in the room to that of you and your sibling.)
+  \item Does Googling help? How?
+  \end{itemize}
+\item Here are some larger objectives to aim for:
+  \begin{itemize}
+\item {\bf Attempt to gather as much information} about the other messages in the class as you can in the time available.
+\item Try pooling information with others (or, if you're up for it, the whole class!)
+\item {\bf Attempt to reconstruct the tree} of all messages. This is a big challenge.
+  What sort of strategy might you use? (Hint: write out all the pairwise distances, e.g. in a table. Are any pairs of messages more closely related?)
+% There is no ``curve'' for this exercise, so it's up to you as a class how collaboratively or competitively you approach it.
+\item {\bf Do whatever you want.} You can continue to work in large teams, or break up into smaller teams again, or swap people between teams, or try to collect a central database (public or private), or work individually, or any other organizational strategy you wish to try. Leave early if you like. Or stay. Please be respectful and inclusive.
+  \end{itemize}
 \end{itemize}
+
+\noindent
+{\bf After the class, submit your best-guess reconstruction of the original (root) sentence to bCourses.}
+
+% If you are feeling ambitious, try submitting a reconstruction of the phylogeny as well.
+% Use Newick-format\footnote[1]{See definition here: {\tt https://en.wikipedia.org/wiki/Newick\_format}}
+% nested parentheses to represent the phone tree, with ID numbers at the leaves.
+% For example, a valid tree for messages with ID numbers 1, 2, 3 \& 4
+% is ``((1,4),(2,3));''.
+
 }
 
 \generatepages

@@ -47,6 +47,7 @@ DICT = scowl.txt
 # default settings
 #EVOLVE = bin/evolve $(DICT) .8 .5 5
 EVOLVE = bin/evolve $(DICT) .8 .5 5
+EVOLVE_SLOW = bin/evolve $(DICT) .7 .5 5
 
 # Example of use:
 #  $(EVOLVE) The sky above the port was the color of television tuned to a dead channel >GIBSON

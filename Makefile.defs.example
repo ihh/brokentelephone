@@ -1,8 +1,15 @@
 # text
 TEXT = CARROLL
 
+# Pre-LLM examples (just mutating words using a dictionary):
+
 CARROLL.src: bin/evolve scowl.txt
 	$(EVOLVE) How cheerfully he seems to grin How neatly spreads his claws And welcomes little fishes in With gently smiling jaws >$@
 
 BORGES.src: bin/evolve scowl.txt
 	$(EVOLVE) Thousands of the greedy abandoned their sweet native hexagons and rushed up the stairways urged on by the vain intention of finding their Vindication >$@
+
+# LLM-based example (preserves sense/meter/phonetics, more faithfully emulates a game of 'Telephone'):
+
+GIBSON.src:
+	python telephone_tree.py "The sky above the port was the color of television tuned to a dead channel" --prompt-distance '6-12' >$@
